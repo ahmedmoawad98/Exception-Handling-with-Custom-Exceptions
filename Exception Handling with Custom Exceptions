@@ -1,0 +1,224 @@
+import java.util.Scanner;
+
+ class Customerprint {
+
+      public static void main(String[] args) {
+
+     
+
+        Scanner sc=new Scanner(System.in);
+
+        String input;
+
+        int cust_no;
+
+        do
+
+        {
+
+        System.out.println("Welcome to the customer Viewer");
+
+        System.out.print("Enter the a Customer Number :");
+
+        cust_no=sc.nextInt();
+
+        CustomerDB cust =new CustomerDB();
+        Customer c = null;
+       
+       
+     
+        try {
+      c= cust.getCustomer(cust_no);
+     } catch (NoSuchCustomerException e) {
+       System.out.println("There is no customer number "+cust_no+" in our records.");
+     
+     }
+     
+
+           if(c!=null)
+
+           {
+           
+
+        System.out.println(c.getName());
+
+        System.out.println(c.getAddress());
+
+        System.out.print(c.getCity());
+
+        System.out.print(","+c.getState());
+
+        System.out.println(" "+c.getPostalCode());
+ 
+     
+       
+       
+       
+         }
+
+       
+         
+         
+            System.out.println("Display another customer? (y/n) : ");
+
+            input=sc.next();
+
+         
+        }while(input.equalsIgnoreCase("Y"));
+
+        if (input.equalsIgnoreCase("N"));
+         System.out.println("Thank you for using. Goodbye!");
+       
+
+       
+
+    }
+
+   
+
+}
+
+ class Customer {
+
+ 
+   private int customerNum;
+   private String name;
+   private String address;
+   private String city;
+   private String state;
+   private String postalCode;
+
+ 
+   
+   public Customer(int customerNum, String name, String address, String city,
+           String state, String postalCode) {
+       super();
+       this.customerNum = customerNum;
+       this.name = name;
+       this.address = address;
+       this.city = city;
+       this.state = state;
+       this.postalCode = postalCode;
+   }
+
+ 
+   public int getCustomerNum() {
+       return customerNum;
+   }
+
+ 
+   public void setCustomerNum(int customerNum) {
+       this.customerNum = customerNum;
+   }
+
+ 
+   public String getName() {
+       return name;
+   }
+
+ 
+   public void setName(String name) {
+       this.name = name;
+   }
+
+ 
+   public String getAddress() {
+       return address;
+   }
+
+ 
+   public void setAddress(String address) {
+       this.address = address;
+   }
+
+ 
+   public String getCity() {
+       return city;
+   }
+
+ 
+   public void setCity(String city) {
+       this.city = city;
+   }
+
+ 
+   public String getState() {
+       return state;
+   }
+
+ 
+   public void setState(String state) {
+       this.state = state;
+   }
+
+ 
+   public String getPostalCode() {
+       return postalCode;
+   }
+
+ 
+   public void setPostalCode(String postalCode) {
+       this.postalCode = postalCode;
+   }
+
+ 
+   public String getNameAndAddress() {
+
+ 
+       return getName() + " " + getAddress();
+   }
+
+ 
+}
+class NoSuchCustomerException extends Exception {
+
+ public int customer;
+
+ public NoSuchCustomerException(int missingCustomer) {
+
+  super("The customer " + missingCustomer + " does not exist!");
+customer = missingCustomer;
+}
+
+ public int getCustomerNum(int missingCustomer) {
+
+  return missingCustomer;
+ }
+
+}
+class CustomerDB {
+   
+   public Customer getCustomer(int value) throws NoSuchCustomerException {
+
+ 
+       if (value == 1000) {
+           return new Customer(1000, "Andrew Antosca",
+                   "485 Duane Terrace", "Ann Arbor", "MI", "48108");
+         
+ 
+       } else if (value == 1001) {
+           return new Customer(1001, "Barbara White", "3400 Richmond Parkway #3423",
+                   "Bristol", "CT", "06010");
+           
+       } else if (value == 1002) {
+           return new Customer(1002, "Karl Vang", "327 Franklin Street",
+                   "Edina", "MN", "55435");
+
+ 
+       } else if (value == 1003) {
+           return new Customer(1002, "Ronda Chavan", "518 Commanche Dr.",
+                   "Greensboro", "NC", "27410");
+
+       } else if (value == 1004) {
+           return new Customer(1004, "Sam Carol", "9379 N. Street",
+                   "Long Beach", "CA", "90806");
+ 
+       } else
+       
+       
+        throw new NoSuchCustomerException(value);
+       
+
+ 
+   }
+}
